@@ -9,12 +9,19 @@ EXAMPLE_INPUT = '''1,2
 
 def load_graph(csv_string):
     graph_data = {}
-    reader = reader = csv.reader(io.StringIO(csv_string))
+    reader = csv.reader(io.StringIO(csv_string))
     for line in reader:
         node = line[0]
         edges = line[1:]
         graph_data.setdefault(node, []).extend(edges)
     return graph_data
+
+def export_graph(m):
+    res = io.StringIO()
+    writer = csv.writer(res)
+    for r in m:
+        writer.writerow(r)
+    return res.getvalue()
 
 
 def extract_nodes(graph):
@@ -60,7 +67,7 @@ def task(csv):
     _, size = extract_nodes(graph)
     adjacency_matrix = create_adjacency_matrix(graph, size)
     result_data = analyze_graph(adjacency_matrix)
-    return result_data
+    return export_graph(result_data)
 
 
 if __name__ == '__main__':
