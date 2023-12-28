@@ -91,7 +91,7 @@ def task():
     grid_B = generate_preference_grid(ranking_B)
     conflict_A_B = identify_mismatches(grid_A, grid_B)
     combined_A_B = integrate_opinions(ranking_A, ranking_B, conflict_A_B)
-    print(combined_A_B)
+    return combined_A_B
 
 if __name__ == '__main__':
     task()
