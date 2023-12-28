@@ -31,7 +31,7 @@ def task(matrix_csv):
     relation_matrix = load_matrix_from_string(matrix_csv)
     normalized_matrix = calculate_normalized_matrix(relation_matrix)
     total_entropy = calculate_total_entropy(normalized_matrix)
-    return total_entropy
+    return round_with_precision(total_entropy)
 
 if __name__ == '__main__':
     matrix_s = EXAMPLE_INPUT
