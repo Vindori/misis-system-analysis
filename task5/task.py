@@ -94,4 +94,4 @@ def task():
     return combined_A_B
 
 if __name__ == '__main__':
-    task()
+    print(task())

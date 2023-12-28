@@ -28,4 +28,4 @@ def task():
     return tau_result
 
 if __name__ == "__main__":
-    task()
+    print(task())
