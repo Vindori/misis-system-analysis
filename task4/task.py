@@ -71,7 +71,7 @@ def task():
 
     mutual_information = entropy_col - conditional_entropy
     
-    return tuple(round_with_precision(value, precision=2) for value in (entropy_row, entropy_col, joint_entropy, conditional_entropy, mutual_information))
+    return entropy_row, entropy_col, joint_entropy, conditional_entropy, mutual_information
 
 if __name__ == '__main__':
     entropy_results = task()
