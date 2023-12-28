@@ -1,4 +1,6 @@
-def read_csv_line(path, row, col):
+import sys
+
+def read_csv_cell(path, row, col):
     with open(path, 'r') as f:
         data = f.read().splitlines()
         if (len(data) < row) and (row > 0):
@@ -10,4 +12,13 @@ def read_csv_line(path, row, col):
 
 
 if __name__ == '__main__':
-    print(read_csv_line('example.csv', 4, 5))
+    if len(sys.argv) != 4:
+        print("Usage: script.py <path> <row> <column>")
+        sys.exit(1)
+
+    filepath = sys.argv[1]
+    row = int(sys.argv[2])
+    col = int(sys.argv[3])
+
+    val = read_csv_cell(filepath, row, col)
+    print(val)
