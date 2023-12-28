@@ -1,11 +1,20 @@
+import io
 import csv
-import argparse
 import math
 
-def load_matrix_from_file(file_path):
-    with open(file_path, mode='r') as file:
-        reader = csv.reader(file)
-        return [list(map(int, row)) for row in reader]
+EXAMPLE_INPUT = '''1,0,1,0,0
+1,1,2,0,0
+2,1,1,1,0
+1,1,0,1,1
+0,1,0,1,1
+0,1,0,1,0'''
+
+def round_with_precision(num, precision=1):
+    return round(num * 10**precision) / 10**precision
+
+def load_matrix_from_string(csv_string):
+    reader = csv.reader(io.StringIO(csv_string))
+    return [list(map(int, row)) for row in reader]
 
 def calculate_normalized_matrix(relation_matrix):
     size = len(relation_matrix)
@@ -18,19 +27,13 @@ def calculate_row_entropy(normalized_row):
 def calculate_total_entropy(normalized_matrix):
     return sum(calculate_row_entropy(row) for row in normalized_matrix)
 
-def process_file(relation_matrix):
+def task(matrix_csv):
+    relation_matrix = load_matrix_from_string(matrix_csv)
     normalized_matrix = calculate_normalized_matrix(relation_matrix)
     total_entropy = calculate_total_entropy(normalized_matrix)
     return total_entropy
 
 if __name__ == '__main__':
-    matrix = [
-        [1,0,1,0,0],
-        [1,1,2,0,0],
-        [2,1,1,1,0],
-        [1,1,0,1,1],
-        [0,1,0,1,1],
-        [0,1,0,1,0],
-    ]
-    entropy_result = process_file(matrix)
-    print(f"Total Entropy: {entropy_result}")
+    matrix_s = EXAMPLE_INPUT
+    entropy_result = task(matrix_s)
+    print(entropy_result)
